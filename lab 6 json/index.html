@@ -39,6 +39,18 @@
               </div>`
               articles.appendChild(articleElement);
           }
+          let slide = JSON.parse(req.responseText).kino;
+          articles=document.getElementById("slides");
+          for (const iterator of slide) {
+              let articleElement=document.createElement("article");
+              articleElement.classList.add("parallax-window");
+              articleElement.innerHTML=`
+              <div class="mySlides fade">
+                <img src="${iterator.photo_link}" style="width:100%">
+                <div class="text">${iterator.movie_name}</div>
+              </div>`
+              articles.appendChild(articleElement);
+          }
         }
       };
 
@@ -105,26 +117,44 @@
     </header>
     <section class="slide">
       <h2>Дэлгэцнээ гарч буй кинонууд</h2>
-      <div class="slide-grid">
-        <article class="showPhoto">
+      <!-- <div class="slide-grid">
+        <article class="showPhoto fade">
           <img src="http://urgoo.mn/Files/FilmPosterGraphic//HO00000744.jpg"
             alt="slide">
           <p class="Moviename">Lorem ipsum dolor</p>
           <a href="" class="time_schu"><h3>Цагийн хуваарь->Захиалга</h3></a>
         </article>
-        <article class="showPhoto">
+        <article class="showPhoto fade">
           <img src="http://urgoo.mn/Files/FilmPosterGraphic//HO00000745.jpg"
             alt="slide">
           <p class="Moviename">Lorem ipsum dolor</p>
           <a href="" class="time_schu"><h3>Цагийн хуваарь->Захиалга</h3></a>
         </article>
-        <article class="showPhoto">
+        <article class="showPhoto fade">
           <img src="http://urgoo.mn/Files/FilmPosterGraphic//HO00000746.jpg"
             alt="slide">
           <p class="Moviename">Lorem ipsum dolor</p>
           <a href="" class="time_schu"><h3>Цагийн хуваарь->Захиалга</h3></a>
         </article>
-      </div>
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+<a class="next" onclick="plusSlides(1)">&#10095;</a>
+      </div> -->
+      <div class="slideshow-container" id="slides">
+        <div class="mySlides fade">
+          <img src="http://urgoo.mn/Files/Sliders/1333.jpg" style="width:100%">
+          <div class="text">Moviename</div>
+        </div>
+        <a class="prev" onclick="plusSlides(-1)" style="left: 0px;">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        
+        </div>
+        <br>
+        
+        <div style="text-align:center">
+          <span class="dot" onclick="currentSlide(1)"></span> 
+          <span class="dot" onclick="currentSlide(2)"></span> 
+          <span class="dot" onclick="currentSlide(3)"></span> 
+        </div>
     </section>
     <section class="showcome">
       <h2>Удахгүй дэлгэцнээ</h2>
@@ -185,5 +215,33 @@
           Сайтыг хөгжүүлэгч: ANDROMEDA
       </section>
     </footer>
+    <script>
+      var slideIndex = 1;
+      showSlides(slideIndex);
+      
+      function plusSlides(n) {
+        showSlides(slideIndex += n);
+      }
+      
+      function currentSlide(n) {
+        showSlides(slideIndex = n);
+      }
+      
+      function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {slideIndex = 1}    
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";  
+        dots[slideIndex-1].className += " active";
+      }
+      </script>
   </body>
 </html>
