@@ -7,15 +7,16 @@
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/index.css">
-    <script>
-          window.onload=function()
+    <script>  
+      window.onload=function()
           {
       let req = new XMLHttpRequest();
-
       req.onreadystatechange = () => {
         if (req.readyState == XMLHttpRequest.DONE) {
           let articlesJSON=JSON.parse(req.responseText).udahgui;
           let articles=document.getElementById("demo");
+          var child = document.getElementsByTagName("article");
+          articles.parentNode.removeChild(articles);
           for (const iterator of articlesJSON) {
               let articleElement=document.createElement("article");
               articleElement.classList.add("coming");
@@ -53,11 +54,11 @@
           }
         }
       };
-
+    setInterval(function(){
       req.open("GET", "https://api.jsonbin.io/b/5dce4ef8ee15a6060aa1cc94/latest", true);
       req.setRequestHeader("secret-key", "$2b$10$EDTE4unbaZ7OFINaGMpNueIAmldsqpuarOzElwfyLbtQqWC8lOXUW");
       req.send();
-
+    }, 5000);
       }
     </script>
   </head>
@@ -159,7 +160,7 @@
     <section class="showcome">
       <h2>Удахгүй дэлгэцнээ</h2>
       <div class="slide-grid" id="demo">
-        
+        <article></article>
       </div>
     </section>
     <section id="parall">
