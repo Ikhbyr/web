@@ -15,8 +15,6 @@
         if (req.readyState == XMLHttpRequest.DONE) {
           let articlesJSON=JSON.parse(req.responseText).udahgui;
           let articles=document.getElementById("demo");
-          var child = document.getElementsByTagName("article");
-          articles.parentNode.removeChild(articles);
           for (const iterator of articlesJSON) {
               let articleElement=document.createElement("article");
               articleElement.classList.add("coming");
@@ -54,11 +52,11 @@
           }
         }
       };
-    setInterval(function(){
+    //setInterval(function(){
       req.open("GET", "https://api.jsonbin.io/b/5dce4ef8ee15a6060aa1cc94/latest", true);
       req.setRequestHeader("secret-key", "$2b$10$EDTE4unbaZ7OFINaGMpNueIAmldsqpuarOzElwfyLbtQqWC8lOXUW");
       req.send();
-    }, 5000);
+    //}, 5000);
       }
     </script>
   </head>
