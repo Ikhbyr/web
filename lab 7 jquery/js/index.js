@@ -30,24 +30,24 @@ window.onload=function()
               articles.appendChild(articleElement);
           }
           let slide = JSON.parse(req.responseText).kino;
-          articles=document.getElementById("slides");
           var dot = this.document.getElementById("dots")
+          var slideshow = document.getElementById("slide-show")
           var i=0
           for (const iterator of slide) {
-              let articleElement=document.createElement("article");
-              articleElement.classList.add("parallax-window");
-              articleElement.innerHTML=`
-              <div class="mySlides fade">
-                <img src="${iterator.photo_link}" style="width:100%">
-                <div class="text">${iterator.movie_name}</div>
-              </div>`
-              articles.appendChild(articleElement);
-              let dotNew = this.document.createElement("span")
-              dotNew.classList.add("dot")
-              dotNew.setAttribute("onclick", "currentSlide("+i+")")
-              i++
-              dot.appendChild(dotNew)
+              let div = document.createElement("div")
+              div.innerHTML = `<img data-u="image" src="${iterator.photo_link}"/>`
+              slideshow.appendChild(div)
           }
+          $(".fade").mouseenter(function(){
+            $(this).children('img').animate({
+              opacity: "0.8"
+            },100);
+          }).mouseleave(function(e){
+            $(this).children('img').animate({
+              opacity: "1"
+            },100)
+          });
+          jssor_1_slider_init();
         }
       };
     //setInterval(function(){
@@ -56,3 +56,44 @@ window.onload=function()
       req.send();
     //}, 5000);
       }
+      window.jssor_1_slider_init = function() {
+
+        var jssor_1_options = {
+          $AutoPlay: 1,
+          $SlideWidth: 720,
+          $ArrowNavigatorOptions: {
+            $Class: $JssorArrowNavigator$
+          },
+          $BulletNavigatorOptions: {
+            $Class: $JssorBulletNavigator$
+          }
+        };
+
+        var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+
+        /*#region responsive code begin*/
+
+        var MAX_WIDTH = 980;
+
+        function ScaleSlider() {
+            var containerElement = jssor_1_slider.$Elmt.parentNode;
+            var containerWidth = containerElement.clientWidth;
+
+            if (containerWidth) {
+
+                var expectedWidth = Math.min(MAX_WIDTH || containerWidth, containerWidth);
+
+                jssor_1_slider.$ScaleWidth(expectedWidth);
+            }
+            else {
+                window.setTimeout(ScaleSlider, 30);
+            }
+        }
+
+        ScaleSlider();
+
+        $Jssor$.$AddEvent(window, "load", ScaleSlider);
+        $Jssor$.$AddEvent(window, "resize", ScaleSlider);
+        $Jssor$.$AddEvent(window, "orientationchange", ScaleSlider);
+        /*#endregion responsive code end*/
+    };
