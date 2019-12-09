@@ -1,0 +1,19 @@
+{
+    "resource": [
+      {
+        "showing": "2019/12/31",
+        "movie_name": "ZombieLand",
+        "photo_link": "http://urgoo.mn/Files/Sliders/1352.jpg"
+      },
+      {
+        "showing": "2019/12/30",
+        "movie_name": "DoctorSleep",
+        "photo_link": "http://urgoo.mn/Files/Sliders/1353.jpg"
+      },
+      {
+        "showing": "2019/10/13",
+        "movie_name": "Christmas",
+        "photo_link": "http://urgoo.mn/Files/Sliders/1356.jpg"
+      }
+    ]
+  }
