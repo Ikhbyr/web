@@ -29,7 +29,7 @@ window.onload=function()
               </div>`
               articles.appendChild(articleElement);
           }
-          let slide = JSON.parse(req.responseText).kino;
+          let slide = JSON.parse(req.responseText);
           var dot = this.document.getElementById("dots")
           var slideshow = document.getElementById("slide-show")
           var i=0

@@ -4,10 +4,10 @@ let router  = express.Router()
 const Task  = require('../model/post')
 
 // Post method
-router.post('/post', function (req, res) {
+router.post('/post', function (require, res) {
     return Task.create({
         id          : require.body.id,
-        genre       : require.body.body,
+        genre       : require.body.genre,
         movie_name  : require.body.movie_name,
         director    : require.body.director,
         age_rating  : require.body.age_rating,
